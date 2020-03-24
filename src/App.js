@@ -6,6 +6,7 @@ import THEME from "./theme";
 const Landing = lazy(() => import("./pages/Landing"));
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import('./pages/Home'));
+const PrivateRoute = lazy(() => import('./components/PrivateRoute'));
 
 const App = () => {
   return (
@@ -14,8 +15,8 @@ const App = () => {
         <Suspense fallback={<div>Loading</div>}>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route excat path="/login" component={Login} />
-            <Route excat path="/home" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/home" component={Home} />
           </Switch>
         </Suspense>
       </BrowserRouter>
