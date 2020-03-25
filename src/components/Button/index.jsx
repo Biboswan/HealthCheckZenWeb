@@ -7,7 +7,11 @@ const ButtonStyled = styled.button`
   padding: 12px 24px;
   color: ${props => props.theme.color.primaryText};
   border: 1px solid ${props => props.theme.color.borderDark};
+  cursor: pointer;
+  min-width: 48px;
+  max-height: 48px;
   text-align: center;
+
   &:hover {
     opacity: 0.85;
   }

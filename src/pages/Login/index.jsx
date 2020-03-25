@@ -46,8 +46,6 @@ const Login = props => {
   const [formStatus, setFormStatus] = useState({});
   const { loginDetails } = props;
 
-  console.log(loginDetails);
-
   if (loginDetails && loginDetails.success === true) {
     props.history.push('/home');
   }

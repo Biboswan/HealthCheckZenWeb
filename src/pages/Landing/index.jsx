@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../../components/Button";
+import Logo from "../../components/Logo";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
-  color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.brand};
+  background-color: ${props => props.theme.color.primaryText};
 `;
 
 const InnerContainer = styled.div`
@@ -21,10 +22,15 @@ const InnerContainer = styled.div`
 
 const TextOr = styled.div`
   margin: 20px auto;
+  color: ${props => props.theme.color.secondaryText};
 `;
 
 const Landing = props => {
-  const { history } = props;
+  const { history, loginDetails } = props;
+
+  if (loginDetails && loginDetails.success === true) {
+    props.history.push('/home');
+  }
 
   const goToLogin = () => {
     history.push("/login");
@@ -37,6 +43,7 @@ const Landing = props => {
   return (
     <Container>
       <InnerContainer>
+        <Logo size='300px' />
         <Button onClick={goToLogin}>Login</Button>
         <TextOr>Or</TextOr>
         <Button onClick={goToSignup}>Signup</Button>
@@ -45,4 +52,13 @@ const Landing = props => {
   );
 };
 
-export default Landing;
+const mapStateToProps = state => {
+  return {
+    loginDetails: state.accountReducer.loginDetails
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Landing);

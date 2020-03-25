@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -54,7 +54,7 @@ const Radio = ({ name, label, value, isChecked }) => {
     console.log('k',value);
     return (
         <Container>
-            <input name={name} type="radio" checked={isChecked}/>
+            <input tabIndex={0} name={name} type="radio" checked={isChecked}/>
             <label data-id={value} className='radio-label'>{label}</label>
         </Container>
     )
