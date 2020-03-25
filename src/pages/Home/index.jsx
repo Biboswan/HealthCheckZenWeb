@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Radio from '../../components/Radio';
@@ -48,6 +48,17 @@ const Home = props => {
             setAnswerSelected(id);
         }
     };
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            const showPostion = (position) => {
+                const { latitude, longitude } = position.coords;
+                console.log(latitude, longitude);
+            };
+
+            navigator.geolocation.getCurrentPosition(showPostion);
+        }
+    },[]);
 
     return (
         <Container>

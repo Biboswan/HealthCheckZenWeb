@@ -8,6 +8,8 @@ export default ({ className, ...rest }) => {
       height="16"
       viewBox="0 0 16 16"
       className={className}
+      role='button'
+      style={{ cursor: 'pointer'}}
       {...rest}
     >
       <path

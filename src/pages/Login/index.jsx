@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import Button from "../../components/Button";
 import InputField from "../../components/Input";
 import { loginUser } from "../../actions/account_action";
-import { connect } from "react-redux";
+import Toastbar from '../../components/Toastbar'; 
 
 const Container = styled.div`
   display: flex;
@@ -41,14 +42,24 @@ const Label = styled.label`
   font-weight: bold;
 `;
 
+let isFormSubmit = false;
+
 const Login = props => {
   const [formValue, setFormValue] = useState({});
   const [formStatus, setFormStatus] = useState({});
+  const [isShowLoginErrorToast, setIsShowLoginErrorToast] = useState(false);
   const { loginDetails } = props;
 
-  if (loginDetails && loginDetails.success === true) {
+  if (loginDetails && loginDetails.success) {
     props.history.push('/home');
   }
+
+  useEffect(() => {
+    if (loginDetails && !loginDetails.success && isFormSubmit) {
+      setIsShowLoginErrorToast(true);
+    }
+
+  },[loginDetails]);
 
   const validation = (name, value) => {
     if (value.length === 0) {
@@ -79,6 +90,7 @@ const Login = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
+    isFormSubmit = true;
     props.loginUser(formValue);
   };
 
@@ -115,6 +127,9 @@ const Login = props => {
           </SubmitSection>
         </form>
       </div>
+      {isShowLoginErrorToast && <Toastbar
+        message='Invalid credentials'
+        setIsToastOpen={setIsShowLoginErrorToast} />}
     </Container>
   );
 };
