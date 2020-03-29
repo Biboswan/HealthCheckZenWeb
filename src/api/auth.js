@@ -14,9 +14,6 @@ const axiosConfig = {
  */
 export const signup = async (email_id, password) => {
   return axios.post(`${API_ROOT}/signup`, { email_id, password }, axiosConfig);
-  /**
- 
-   */
 };
 
 /**

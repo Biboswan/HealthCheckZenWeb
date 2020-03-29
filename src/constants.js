@@ -22,3 +22,5 @@ export const API_ROOT = proxyurl+"http://34.93.21.176";
 export const LOGIN = "Login";
 export const LOGOUT = "Logout";
 export const SIGNUP = "Sign-up";
+export const FETCH_QUESTIONS = 'Fetch_questios';
+export const FETCHING_QUESTIONS = 'Fetching_questions';

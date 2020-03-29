@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { fetchQuestions } from "../../actions/questions_actions";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Radio from '../../components/Radio';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
 display: flex;
@@ -41,24 +43,29 @@ const options = [{ id:1, val:'Yes' }, { id: 2, val: 'No'}];
 
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
+    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const { isFetchingQuestions, questions, fetchQuestions } = props;
 
-    const handleAnswerSelected = e => {
-      const id = e.target.dataset["id"];
-        if(!!id) {
-            setAnswerSelected(id);
-        }
-    };
+    useEffect(() => {
+        fetchQuestions();
+    },[]);
 
     useEffect(() => {
         if (navigator.geolocation) {
             const showPostion = (position) => {
                 const { latitude, longitude } = position.coords;
-                console.log(latitude, longitude);
             };
 
             navigator.geolocation.getCurrentPosition(showPostion);
         }
     },[]);
+
+    const handleAnswerSelected = e => {
+        const id = e.target.dataset["id"];
+          if(!!id) {
+              setAnswerSelected(id);
+          }
+    };
 
     return (
         <Container>
@@ -82,4 +89,12 @@ const Home = props => {
     );
 };
 
-export default Home;
+const mapStateToProps = ({ questionsReducer }) => {
+    const { questions, isFetchingQuestions } = questionsReducer;
+    return {
+        isFetchingQuestions,
+        questions
+    };
+};
+
+export default connect(mapStateToProps, { fetchQuestions })(Home);
