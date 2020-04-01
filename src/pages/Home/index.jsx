@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
 import memoizeOne from 'memoize-one';
 import { fetchQuestions, setCurrentQuestionId } from "../../actions/questions_actions";
-import { updateAnswers } from "../../actions/answer_action";
+import { updateAnswers, submitAnswers } from "../../actions/answer_action";
 import { QuestionTree } from '../../utils/data-structures';
 import Loader from "../../components/Loader";
 import styled from "styled-components";
@@ -57,19 +57,13 @@ const Home = props => {
             currentQuestionNode,
             setCurrentQuestionId
         } = props;
-    console.log(currentQuestionNode);
+
     useEffect(() => {
         fetchQuestions();
     },[]);
 
     useEffect(() => {
-        if (navigator.geolocation) {
-            const showPostion = (position) => {
-                const { latitude, longitude } = position.coords;
-            };
-
-            navigator.geolocation.getCurrentPosition(showPostion);
-        }
+        
     },[]);
 
     const handleAnswerSelected = e => {
@@ -84,7 +78,7 @@ const Home = props => {
             let nextNode = currentQuestionNode[ansSelected];
             if (nextNode) {
                 setCurrentQuestionId(currentQuestionNode[ansSelected].q_id);
-                //updateAnswers(currentQuestionNode.q_id, ansSelected);
+                updateAnswers(currentQuestionNode.q_id, ansSelected);
             } else {
                 // submitAnswers
             }
@@ -144,4 +138,4 @@ const mapStateToProps = ({ questionsReducer }) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchQuestions, setCurrentQuestionId, updateAnswers })(Home);
+export default connect(mapStateToProps, { fetchQuestions, setCurrentQuestionId, updateAnswers, submitAnswers })(Home);

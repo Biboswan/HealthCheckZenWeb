@@ -26,5 +26,5 @@ export const FETCH_QUESTIONS = 'Fetch_questions';
 export const FETCHING_QUESTIONS = 'Fetching_questions';
 export const SUBMITING_ANSWERS = 'Submiting_answers';
 export const SUBMIT_ANSWERS = 'Submit_answers';
-export const  SET_CURRENT_QUESTION_ID = 'Set_Current_Question_Id';
+export const SET_CURRENT_QUESTION_ID = 'Set_Current_Question_Id';
 export const UPDATE_ANSWERS = 'Update_answers';
