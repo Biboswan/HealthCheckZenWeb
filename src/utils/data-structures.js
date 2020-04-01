@@ -2,9 +2,9 @@ export class QuestionNode {
     constructor(q_id, weight, question_texts, parent = null) {
         this.yes = null;
         this.no = null;
+        this.q_id = q_id;
         this.data = {
             weight,
-            q_id,
             question_texts
         }
         this.parent = parent;
@@ -14,7 +14,7 @@ export class QuestionNode {
         this.yes = node;
     }
 
-    setNode(node) {
+    setNo(node) {
         this.no = node;
     }
 }
@@ -30,7 +30,7 @@ export class QuestionTree {
         this.root = new QuestionNode(q_id, weight, question_texts);
         const st = new Stack();
         st.push(this.root);
-        let newNode, temp2, temp3, i=1;
+        let newNode,popedNode, temp2, temp3, i=1;
         let len = preorderArr.length;
         while(i<len) {
            popedNode = st.pop();
@@ -69,6 +69,20 @@ export class QuestionTree {
            }
         }
     }
+
+    findNode(node, q_id) {
+        if (node) {
+            if (node.q_id === q_id) {
+                return node;
+            }
+
+            const nodeA = this.findNode(node.yes, q_id);
+            const nodeB = this.findNode(node.no, q_id);
+            return nodeA? nodeA : nodeB ? nodeB : null;
+        }
+
+        return null;
+    }
 }
 
 export class Stack {
@@ -88,5 +102,3 @@ export class Stack {
         return this.items.length === 0;
     }
 }
-
-const Tree = new QuestionTree();

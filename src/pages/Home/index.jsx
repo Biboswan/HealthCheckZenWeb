@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { fetchQuestions } from "../../actions/questions_actions";
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
+import memoizeOne from 'memoize-one';
+import { fetchQuestions, setCurrentQuestionId } from "../../actions/questions_actions";
+import { updateAnswers } from "../../actions/answer_action";
+import { QuestionTree } from '../../utils/data-structures';
+import Loader from "../../components/Loader";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Radio from '../../components/Radio';
@@ -38,14 +42,22 @@ const Options = styled.form`
     margin-top: 20px;
 `;
 
-const q = 'Do you have fever ?';
-const options = [{ id:1, val:'Yes' }, { id: 2, val: 'No'}];
+const buildTree = memoizeOne(preorderArr => {
+    const Tree = new QuestionTree();
+    Tree.constructTree(preorderArr);
+    return Tree;
+});
+
 
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
-    const [currentQuestion, setCurrentQuestion] = useState(null);
-    const { isFetchingQuestions, questions, fetchQuestions } = props;
-
+    const { isFetchingQuestions,
+            fetchQuestions,
+            updateAnswers,
+            currentQuestionNode,
+            setCurrentQuestionId
+        } = props;
+    console.log(currentQuestionNode);
     useEffect(() => {
         fetchQuestions();
     },[]);
@@ -61,40 +73,75 @@ const Home = props => {
     },[]);
 
     const handleAnswerSelected = e => {
-        const id = e.target.dataset["id"];
-          if(!!id) {
-              setAnswerSelected(id);
+        const answer = e.target.dataset["id"];
+          if(!!answer) {
+              setAnswerSelected(answer);
           }
     };
 
+    const handleNext = useCallback(() => {
+        if (!!ansSelected) {
+            let nextNode = currentQuestionNode[ansSelected];
+            if (nextNode) {
+                setCurrentQuestionId(currentQuestionNode[ansSelected].q_id);
+                //updateAnswers(currentQuestionNode.q_id, ansSelected);
+            } else {
+                // submitAnswers
+            }
+        }
+    },[ansSelected]);
+
+    const handlePrev = useCallback(() => {
+        setCurrentQuestionId(currentQuestionNode.parent.q_id);
+    },[]);
+
     return (
         <Container>
-            <Question>
-                {q}
-            </Question>
-            <Options onClick={handleAnswerSelected}>
-                {options.map(({ id, val}) =>
-                <Radio
-                    key={id}
-                    value={id}
-                    name="radio"
-                    label={val}
-                    isChecked={ansSelected==id} />)}
-            </Options>
-            <ButtonContainer>
-                <Button className='btn-next'>Next</Button>
-                <Button>Prev</Button>
-            </ButtonContainer>
+            {isFetchingQuestions ?
+            <Loader/> : 
+            <Fragment>
+                <Question>
+                    {currentQuestionNode && currentQuestionNode.data.question_texts.english}
+                </Question>
+                <Options onClick={handleAnswerSelected}>
+                    <Radio
+                        value="yes"
+                        name="radio"
+                        label="Yes"
+                        isChecked={ansSelected === "yes"} />
+                    <Radio
+                        value="no"
+                        name="radio"
+                        label="No"
+                        isChecked={ansSelected === "no"} />
+                </Options>
+                <ButtonContainer>
+                    <Button onClick={handleNext} className='btn-next'>Next</Button>
+                    {currentQuestionNode && currentQuestionNode.parent
+                    && <Button onClick={handlePrev}>Prev</Button>}
+                </ButtonContainer>
+            </Fragment>}
         </Container>
     );
 };
 
 const mapStateToProps = ({ questionsReducer }) => {
-    const { questions, isFetchingQuestions } = questionsReducer;
+    const { isFetchingQuestions, questions, currentQuestionId } = questionsReducer;
+    let currentQuestionNode = null;
+    if (questions) {
+        const Tree = buildTree(questions);
+    
+        if(!currentQuestionId) {
+            currentQuestionNode = Tree.root;
+        } else {
+            currentQuestionNode = Tree.findNode(Tree.root, currentQuestionId);
+        }
+    }
+
     return {
         isFetchingQuestions,
-        questions
+        currentQuestionNode
     };
 };
 
-export default connect(mapStateToProps, { fetchQuestions })(Home);
+export default connect(mapStateToProps, { fetchQuestions, setCurrentQuestionId, updateAnswers })(Home);

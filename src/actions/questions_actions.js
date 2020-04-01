@@ -1,4 +1,4 @@
-import { FETCHING_QUESTIONS, FETCH_QUESTIONS } from "../constants";
+import { FETCHING_QUESTIONS, FETCH_QUESTIONS,  SET_CURRENT_QUESTION_ID } from "../constants";
 import { fetchQuestionsApi } from "../api/questions";
 
 export const fetchQuestions = () => {
@@ -10,9 +10,14 @@ export const fetchQuestions = () => {
                 const { token } = loginDetails;
                 dispatch({ type: FETCHING_QUESTIONS });
                 const { data } = await fetchQuestionsApi(token);
-                console.log(data.preordered_tree);
-                dispatch({ type: FETCH_QUESTIONS, payload: data });
+                dispatch({ type: FETCH_QUESTIONS, payload: data.preordered_tree });
           }
         } catch (err) {}
       };
 }
+
+export const setCurrentQuestionId = (currentQuestionId) => {
+  return dispatch => {
+    dispatch({ type: SET_CURRENT_QUESTION_ID, payload: currentQuestionId });
+  }
+};
