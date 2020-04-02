@@ -58,7 +58,8 @@ const Home = props => {
             currentQuestionNode,
             fetchQuestions,
             goToNextQuestion,
-            updateAnswers
+            updateAnswers,
+            submitAnswers
         } = props;
 
     useEffect(() => {
@@ -109,7 +110,7 @@ const Home = props => {
     };
 
     const handleSubmit = () => {
-
+        submitAnswers();
     };
 
     return (

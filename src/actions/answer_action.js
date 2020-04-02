@@ -7,11 +7,21 @@ export const updateAnswers = (qid, answer, answeredAll = false) => {
     }
 };
 
-export const submitAnswers = (questionId, answer) => {
+export const submitAnswers = () => {
     return async (dispatch, getState) => {
         dispatch({ type: SUBMITING_ANSWERS })
         try {
-            dispatch({ type:SUBMIT_ANSWERS, payload: {}});
+            const { answers } = getState().answersReducer;
+            let answersParam = {};
+            for (let key in answers) {
+                answersParam[key] = answers[key] ==="Yes" ? true: false;
+            }
+
+            const location = JSON.parse(localStorage.getItem('location'));
+            const { loginDetails } = getState().accountReducer;
+            const { token } = loginDetails;
+            const { data } = submitAnswersApi({token, answers: answersParam, location});
+            dispatch({ type:SUBMIT_ANSWERS, payload: data });
         } catch(err) {
 
         }
