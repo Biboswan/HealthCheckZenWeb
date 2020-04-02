@@ -7,6 +7,8 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
 import reducers from "./reducers";
+//import { I18nextProvider } from 'react-i18next';
+//import i18n from './i18n';
 import App from "./App";
 
 const persistConfig = {

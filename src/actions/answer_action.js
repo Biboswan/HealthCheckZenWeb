@@ -1,9 +1,9 @@
 import { UPDATE_ANSWERS, SUBMITING_ANSWERS, SUBMIT_ANSWERS } from "../constants";
-import { submitAnswers } from "../api/questions";
+import { submitAnswers as submitAnswersApi } from "../api/questions";
 
-export const updateAnswers = (questionId, newAnswer) => {
+export const updateAnswers = (qid, answer, answeredAll = false) => {
     return dispatch => {
-        dispatch({ type: UPDATE_ANSWERS, payload: { [questionId] : newAnswer }})
+        dispatch({ type: UPDATE_ANSWERS, payload: { qid, answer, answeredAll }});
     }
 };
 

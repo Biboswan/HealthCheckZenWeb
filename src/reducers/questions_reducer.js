@@ -1,4 +1,4 @@
-import { FETCHING_QUESTIONS, FETCH_QUESTIONS, SET_CURRENT_QUESTION_ID } from "../constants";
+import { FETCHING_QUESTIONS, FETCH_QUESTIONS, SET_CURRENT_QUESTION_ID, GO_TO_NEXT_Q } from "../constants";
 
 const INITIAL_STATE = {
   questions: null,
@@ -14,6 +14,8 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, isFetchingQuestions: true };
     case  SET_CURRENT_QUESTION_ID:
       return { ...state, currentQuestionId: action.payload };
+    case GO_TO_NEXT_Q:
+      return { ...state, currentQuestionId: action.payload.nextQid }
     default:
       return state;
   }

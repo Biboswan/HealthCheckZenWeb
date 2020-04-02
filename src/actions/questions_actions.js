@@ -1,4 +1,4 @@
-import { FETCHING_QUESTIONS, FETCH_QUESTIONS,  SET_CURRENT_QUESTION_ID } from "../constants";
+import { FETCHING_QUESTIONS, FETCH_QUESTIONS, SET_CURRENT_QUESTION_ID } from "../constants";
 import { fetchQuestionsApi } from "../api/questions";
 
 export const fetchQuestions = () => {
@@ -16,8 +16,10 @@ export const fetchQuestions = () => {
       };
 }
 
-export const setCurrentQuestionId = (currentQuestionId) => {
-  return dispatch => {
-    dispatch({ type: SET_CURRENT_QUESTION_ID, payload: currentQuestionId });
-  }
-};
+/**
+  export const setCurrentQuestionId = (currentQuestionId) => {
+    return dispatch => {
+      dispatch({ type: SET_CURRENT_QUESTION_ID, payload: currentQuestionId });
+    }
+  };
+**/

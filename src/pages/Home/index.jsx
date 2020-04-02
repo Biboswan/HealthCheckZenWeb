@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react';
+import React, { useState, useEffect, useLayoutEffect, Fragment } from 'react';
 import memoizeOne from 'memoize-one';
-import { fetchQuestions, setCurrentQuestionId } from "../../actions/questions_actions";
+import { fetchQuestions } from "../../actions/questions_actions";
 import { updateAnswers, submitAnswers } from "../../actions/answer_action";
+import { goToNextQuestion } from "../../actions/batch_action";
 import { QuestionTree } from '../../utils/data-structures';
+import { setGeoLocation } from '../../utils/helper';
 import Loader from "../../components/Loader";
 import styled from "styled-components";
 import Button from "../../components/Button";
@@ -48,23 +50,33 @@ const buildTree = memoizeOne(preorderArr => {
     return Tree;
 });
 
-
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
     const { isFetchingQuestions,
-            fetchQuestions,
-            updateAnswers,
+            answers,
+            answeredAll,
             currentQuestionNode,
-            setCurrentQuestionId
+            fetchQuestions,
+            goToNextQuestion,
+            updateAnswers
         } = props;
 
     useEffect(() => {
         fetchQuestions();
+        setGeoLocation();
     },[]);
 
-    useEffect(() => {
-        
-    },[]);
+    useLayoutEffect(() => {
+        if (currentQuestionNode) {
+            let { q_id } = currentQuestionNode;
+            if (answers && answers.hasOwnProperty(q_id)) {
+                setAnswerSelected(answers[q_id]);
+            } else {
+                setAnswerSelected(null);
+            }
+        }
+    },[currentQuestionNode]);
+
 
     const handleAnswerSelected = e => {
         const answer = e.target.dataset["id"];
@@ -73,21 +85,32 @@ const Home = props => {
           }
     };
 
-    const handleNext = useCallback(() => {
+    const handleNext = () => {
         if (!!ansSelected) {
             let nextNode = currentQuestionNode[ansSelected];
             if (nextNode) {
-                setCurrentQuestionId(currentQuestionNode[ansSelected].q_id);
-                updateAnswers(currentQuestionNode.q_id, ansSelected);
+                goToNextQuestion({ 
+                    qid: currentQuestionNode.q_id,
+                    nextQid: currentQuestionNode[ansSelected].q_id,
+                    answer: ansSelected
+                });
             } else {
-                // submitAnswers
+                updateAnswers(currentQuestionNode.q_id, ansSelected, true);
             }
         }
-    },[ansSelected]);
+    };
 
-    const handlePrev = useCallback(() => {
-        setCurrentQuestionId(currentQuestionNode.parent.q_id);
-    },[]);
+    const handlePrev = () => {
+        goToNextQuestion({ 
+            qid: currentQuestionNode.q_id,
+            nextQid: currentQuestionNode.parent.q_id,
+            answer: ansSelected
+        });
+    };
+
+    const handleSubmit = () => {
+
+    };
 
     return (
         <Container>
@@ -110,7 +133,11 @@ const Home = props => {
                         isChecked={ansSelected === "no"} />
                 </Options>
                 <ButtonContainer>
-                    <Button onClick={handleNext} className='btn-next'>Next</Button>
+                    {currentQuestionNode &&
+                    (currentQuestionNode.yes || currentQuestionNode.no)
+                    &&<Button onClick={handleNext} className='btn-next'>Next</Button>}
+                    {currentQuestionNode && (!currentQuestionNode.yes && !currentQuestionNode.no) && answeredAll
+                    && <Button className='btn-next' onClick={handleSubmit}>Submit</Button>}
                     {currentQuestionNode && currentQuestionNode.parent
                     && <Button onClick={handlePrev}>Prev</Button>}
                 </ButtonContainer>
@@ -119,8 +146,10 @@ const Home = props => {
     );
 };
 
-const mapStateToProps = ({ questionsReducer }) => {
+const mapStateToProps = ({ questionsReducer, answersReducer }) => {
     const { isFetchingQuestions, questions, currentQuestionId } = questionsReducer;
+    const { answers, answeredAll } = answersReducer;
+
     let currentQuestionNode = null;
     if (questions) {
         const Tree = buildTree(questions);
@@ -134,8 +163,10 @@ const mapStateToProps = ({ questionsReducer }) => {
 
     return {
         isFetchingQuestions,
-        currentQuestionNode
+        currentQuestionNode,
+        answers,
+        answeredAll
     };
 };
 
-export default connect(mapStateToProps, { fetchQuestions, setCurrentQuestionId, updateAnswers, submitAnswers })(Home);
+export default connect(mapStateToProps, { fetchQuestions, updateAnswers, goToNextQuestion, submitAnswers })(Home);
