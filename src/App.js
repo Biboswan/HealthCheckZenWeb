@@ -7,6 +7,7 @@ import THEME from "./theme";
 const Landing = lazy(() => import("./pages/Landing"));
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import('./pages/Home'));
+const Signup = lazy(() => import("./pages/Signup"));
 const PrivateRoute = lazy(() => import('./components/PrivateRoute'));
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
             <PrivateRoute exact path="/home" component={Home} />
           </Switch>
         </Suspense>

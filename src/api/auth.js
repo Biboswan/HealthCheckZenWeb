@@ -12,8 +12,8 @@ const axiosConfig = {
  * Create Account
  * @returns {Promise}
  */
-export const signup = async (email_id, password) => {
-  return axios.post(`${API_ROOT}/signup`, { email_id, password }, axiosConfig);
+export const signup = async ({ email_id, password, age }) => {
+  return axios.post(`${API_ROOT}/signup`, { email_id, password, age }, axiosConfig);
 };
 
 /**
