@@ -41,8 +41,6 @@ const Label = styled.label`
   font-weight: bold;
 `;
 
-const SuccessText = styled.h2``;
-
 const Signup = props => {
     const [formValue, setFormValue] = useState({});
     const [formStatus, setFormStatus] = useState({});
