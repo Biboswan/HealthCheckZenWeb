@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { en, hi } from './locales';
+import { en, hi, bn } from './locales';
 
 const options = {
   interpolation: {
@@ -14,11 +14,14 @@ const options = {
 
   resources: {
     en: {
-      common: en['en-lg'],
+      common: en['en-lg']
     },
     hi: {
-      common: hi['hi-lg'],
+      common: hi['hi-lg']
     },
+    bn: {
+      common: bn['bn-lg']
+    }
   },
 
   fallbackLng: 'en',

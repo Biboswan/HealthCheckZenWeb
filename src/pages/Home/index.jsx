@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import memoizeOne from 'memoize-one';
 import { fetchQuestions } from "../../actions/questions_actions";
 import { updateAnswers, submitAnswers } from "../../actions/answer_action";
@@ -52,6 +53,7 @@ const buildTree = memoizeOne(preorderArr => {
 
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
+    const { t } = useTranslation();
     const { isFetchingQuestions,
             answers,
             answeredAll,
@@ -125,22 +127,22 @@ const Home = props => {
                     <Radio
                         value="yes"
                         name="radio"
-                        label="Yes"
+                        label={t('yes')}
                         isChecked={ansSelected === "yes"} />
                     <Radio
                         value="no"
                         name="radio"
-                        label="No"
+                        label={t('no')}
                         isChecked={ansSelected === "no"} />
                 </Options>
                 <ButtonContainer>
                     {currentQuestionNode &&
                     (currentQuestionNode.yes || currentQuestionNode.no)
-                    &&<Button onClick={handleNext} className='btn-next'>Next</Button>}
+                    &&<Button onClick={handleNext} className='btn-next'>{t('next')}</Button>}
                     {currentQuestionNode && (!currentQuestionNode.yes && !currentQuestionNode.no) && answeredAll
-                    && <Button className='btn-next' onClick={handleSubmit}>Submit</Button>}
+                    && <Button className='btn-next' onClick={handleSubmit}>{t('submit')}</Button>}
                     {currentQuestionNode && currentQuestionNode.parent
-                    && <Button onClick={handlePrev}>Prev</Button>}
+                    && <Button onClick={handlePrev}>{t('prev')}</Button>}
                 </ButtonContainer>
             </Fragment>}
         </Container>
