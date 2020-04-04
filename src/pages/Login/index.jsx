@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Button from "../../components/Button";
@@ -9,7 +10,7 @@ import Toastbar from '../../components/Toastbar';
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
@@ -48,6 +49,7 @@ const Login = props => {
   const [formValue, setFormValue] = useState({});
   const [formStatus, setFormStatus] = useState({});
   const [isShowLoginErrorToast, setIsShowLoginErrorToast] = useState(false);
+  const { t } = useTranslation();
   const { loginDetails } = props;
 
   if (loginDetails && loginDetails.success) {
@@ -65,7 +67,7 @@ const Login = props => {
     if (value.length === 0) {
       return setFormStatus(formStatus => ({
         ...formStatus,
-        [name]: { type: "error", message: "Empty Field!" }
+        [name]: { type: "error", message: t('emptyField') }
       }));
     }
 
@@ -100,7 +102,7 @@ const Login = props => {
         <form onChange={handleOnChange} onBlur={handleOnBlur}>
           <FieldsContainer>
             <section>
-              <Label>Email</Label>
+              <Label>{t('email')}</Label>
               <br />
               <AccountInputField
                 type="email"
@@ -111,7 +113,7 @@ const Login = props => {
               />
             </section>
             <section>
-              <Label>Password</Label>
+              <Label>{t('password')}</Label>
               <br />
               <AccountInputField
                 type="password"
@@ -123,12 +125,12 @@ const Login = props => {
             </section>
           </FieldsContainer>
           <SubmitSection>
-            <Button onClick={handleOnSubmit}>Login</Button>
+            <Button onClick={handleOnSubmit}>{t('login')}</Button>
           </SubmitSection>
         </form>
       </div>
       {isShowLoginErrorToast && <Toastbar
-        message='Invalid credentials'
+        message={t('wrongCred')}
         setIsToastOpen={setIsShowLoginErrorToast} />}
     </Container>
   );

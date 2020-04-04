@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from 'react-i18next';
+import { connect } from "react-redux";
 import Button from "../../components/Button";
 import Logo from "../../components/Logo";
-import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   align-items: center;
   justify-content: center;
   background-color: ${props => props.theme.color.primaryText};
@@ -26,6 +27,7 @@ const TextOr = styled.div`
 `;
 
 const Landing = props => {
+  const { t } = useTranslation();
   const { history, loginDetails } = props;
 
   if (loginDetails && loginDetails.success === true) {
@@ -44,9 +46,9 @@ const Landing = props => {
     <Container>
       <InnerContainer>
         <Logo size='300px' />
-        <Button onClick={goToLogin}>Login</Button>
-        <TextOr>Or</TextOr>
-        <Button onClick={goToSignup}>Signup</Button>
+        <Button onClick={goToLogin}>{t('login')}</Button>
+        <TextOr>{t('or')}</TextOr>
+        <Button onClick={goToSignup}>{t('signup')}</Button>
       </InnerContainer>
     </Container>
   );

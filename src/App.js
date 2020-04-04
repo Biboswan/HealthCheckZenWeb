@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Loader from './components/Loader'
+import Footer from './components/Footer';
 import THEME from "./theme";
 
 const Landing = lazy(() => import("./pages/Landing"));
@@ -23,6 +24,7 @@ const App = () => {
           </Switch>
         </Suspense>
       </BrowserRouter>
+      <Footer />
     </ThemeProvider>
   );
 };

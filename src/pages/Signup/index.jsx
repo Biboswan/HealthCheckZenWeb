@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import styled from "styled-components";
 import Button from "../../components/Button";
 import InputField from "../../components/Input";
@@ -8,7 +9,7 @@ import { signup } from '../../api/auth';
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
@@ -46,12 +47,13 @@ const Signup = props => {
     const [formStatus, setFormStatus] = useState({});
     const [ formSubmitStatus, setFormSubmitStatus] = useState(null);
     const [isShowFormSubmitErrorToast, setIsShowFormSubmitErrorToast] = useState(false);
+    const { t } = useTranslation();
 
     const validation = (name, value) => {
       if (value.length === 0) {
         return setFormStatus(formStatus => ({
           ...formStatus,
-          [name]: { type: "error", message: "Empty Field!" }
+          [name]: { type: "error", message: t('emptyField') }
         }));
       }
   
@@ -93,7 +95,7 @@ const Signup = props => {
           (<form onChange={handleOnChange} onBlur={handleOnBlur}>
             <FieldsContainer>
               <section>
-                <Label>Email</Label>
+                <Label>{t('email')}</Label>
                 <br />
                 <AccountInputField
                   type="email"
@@ -104,7 +106,7 @@ const Signup = props => {
                 />
               </section>
               <section>
-                <Label>Password</Label>
+                <Label>{t('password')}</Label>
                 <br />
                 <AccountInputField
                   type="password"
@@ -115,7 +117,7 @@ const Signup = props => {
                 />
               </section>
               <section>
-                <Label>Age</Label>
+                <Label>{t('age')}</Label>
                 <br />
                 <AccountInputField
                   type="number"
@@ -127,7 +129,7 @@ const Signup = props => {
               </section>
             </FieldsContainer>
             <SubmitSection>
-              <Button onClick={handleOnSubmit}>Signup</Button>
+              <Button onClick={handleOnSubmit}>{t('signup')}</Button>
             </SubmitSection>
           </form>)}
           {isShowFormSubmitErrorToast && formSubmitStatus.status === "error" && <Toastbar
