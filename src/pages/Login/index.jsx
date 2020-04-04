@@ -9,7 +9,7 @@ import Toastbar from '../../components/Toastbar';
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
