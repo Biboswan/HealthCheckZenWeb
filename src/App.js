@@ -2,9 +2,9 @@ import React, { lazy, Suspense } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Loader from './components/Loader';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import THEME from "./theme";
+import Header from './components/Header';
 
 const Landing = lazy(() => import("./pages/Landing"));
 const Login = lazy(() => import("./pages/Login"));

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import Logo from "../Logo";
 import Button from '../Button';
 
@@ -28,16 +29,24 @@ const LogoutButton = styled(Button)`
     color: ${props => props.theme.color.primaryText};
 `;
 
-const Header = () => {
+const Header = props => {
     const { t } = useTranslation();
+    const { loginDetails } = props;
 
     return (
         <Container>
             <Logo size='80px' className='logo' />
             <h1>{t('appName')}</h1>
-            <LogoutButton>{t('logout')}</LogoutButton>
+            { loginDetails &&  loginDetails.success &&
+            <LogoutButton>{t('logout')}</LogoutButton>}
         </Container>
     );
 };
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+      loginDetails: state.accountReducer.loginDetails
+    };
+};
+
+export default connect(mapStateToProps, null)(Header);
