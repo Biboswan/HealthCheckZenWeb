@@ -1,10 +1,11 @@
 export class QuestionNode {
-    constructor(q_id, weight, question_texts, parent = null) {
+    constructor(q_id, yes_weight, no_weight, question_texts, parent = null) {
         this.yes = null;
         this.no = null;
         this.q_id = q_id;
+        this.yes_weight = yes_weight;
+        this.no_weight = no_weight;
         this.data = {
-            weight,
             question_texts
         }
         this.parent = parent;
@@ -26,8 +27,8 @@ export class QuestionTree {
     }
 
     constructTree(preorderArr) {
-        let { weight, q_id, question_texts } = preorderArr[0];
-        this.root = new QuestionNode(q_id, weight, question_texts);
+        let { yes_weight, no_weight, q_id, question_texts } = preorderArr[0];
+        this.root = new QuestionNode(q_id, yes_weight, no_weight, question_texts);
         const st = new Stack();
         st.push(this.root);
         let newNode,popedNode, temp2, temp3, i=1;
@@ -37,16 +38,16 @@ export class QuestionTree {
            temp2 = preorderArr[i];
            if (temp2) {
                 if (!popedNode.yes) {
-                    let { weight, q_id, question_texts } = temp2;
-                    newNode = new QuestionNode(q_id, weight, question_texts, popedNode);
+                    let { yes_weight, no_weight, q_id, question_texts } = temp2;
+                    newNode = new QuestionNode(q_id, yes_weight, no_weight, question_texts, popedNode);
                     popedNode.setYes(newNode);
                     st.push(newNode);
                     i++;
                     continue;
                 }
                 if (!popedNode.no) {
-                    let { weight, q_id, question_texts } = temp2;
-                    newNode = new QuestionNode(q_id, weight, question_texts, popedNode);
+                    let { yes_weight, no_weight, q_id, question_texts } = temp2;
+                    newNode = new QuestionNode(q_id,  yes_weight, no_weight, question_texts, popedNode);
                     popedNode.setNo(newNode);
                     st.push(newNode);
                     i++;
@@ -60,8 +61,8 @@ export class QuestionTree {
                     i++;
                     st.push(popedNode.parent);
                 } else {
-                    let { weight, q_id, question_texts } = temp3;
-                    newNode = new QuestionNode(q_id, weight, question_texts, popedNode );
+                    let { yes_weight, no_weight, q_id, question_texts } = temp3;
+                    newNode = new QuestionNode(q_id, yes_weight, no_weight, question_texts, popedNode );
                     popedNode.setNo(newNode);
                     st.push(newNode);
                     i++;
