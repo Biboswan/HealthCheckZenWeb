@@ -22,6 +22,7 @@ const InnerContainer = styled.ul`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    bottom: 0;
 
     & li {
         display: inline;

@@ -101,7 +101,6 @@ const Home = props => {
         }
     },[currentQuestionNode]);
 
-
     const handleAnswerSelected = e => {
         const answer = e.target.dataset["id"];
           if(!!answer) {

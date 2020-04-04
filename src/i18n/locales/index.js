@@ -1,6 +1,8 @@
 const en = {
     'en-lg': {
+        appName: 'HealthCheckZen',
         login: 'Login',
+        logout: 'logout',
         signup: 'Signup',
         email: 'Email',
         password: 'Password',
@@ -18,7 +20,9 @@ const en = {
 
 const hi = {
     'hi-lg': {
+        appName: 'हेल्थचेक ज़ेन',
         login: 'लॉग इन करें',
+        logout: 'लॉग आउट',
         signup: 'साइन अप करें',
         email: 'ईमेल',
         password: 'पासवर्ड',
@@ -36,7 +40,9 @@ const hi = {
 
 const bn = {
     'bn-lg': {
+        appName: 'স্বাস্থ্য পরীক্ষা জেন',
         login: 'অথবা',
+        logout: 'প্রস্থান',
         signup: 'নিবন্ধন করুন',
         email: 'ই-মেইল',
         password: 'পাসওয়ার্ড',
