@@ -51,6 +51,15 @@ const buildTree = memoizeOne(preorderArr => {
     return Tree;
 });
 
+const getNativeQuestion = (question) => {
+    const lng = localStorage.getItem('i18nextLng');
+    switch(lng) {
+        case 'hi': return question.hindi;
+        case 'bn': return question.bengali;
+        default: return question.english;
+    }
+};
+
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
     const { t } = useTranslation();
@@ -115,13 +124,15 @@ const Home = props => {
         submitAnswers();
     };
 
+    
+
     return (
         <Container>
             {isFetchingQuestions ?
             <Loader/> : 
             <Fragment>
                 <Question>
-                    {currentQuestionNode && currentQuestionNode.data.question_texts.english}
+                    {currentQuestionNode && getNativeQuestion(currentQuestionNode.data.question_texts)}
                 </Question>
                 <Options onClick={handleAnswerSelected}>
                     <Radio
