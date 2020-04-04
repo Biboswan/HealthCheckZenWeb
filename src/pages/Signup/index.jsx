@@ -56,7 +56,7 @@ const Signup = props => {
           [name]: { type: "error", message: t('emptyField') }
         }));
       }
-  
+
       setFormStatus(formStatus => ({
         ...formStatus,
         [name]: { type: "success" }

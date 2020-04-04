@@ -10,6 +10,7 @@ export const fetchQuestions = () => {
                 const { token } = loginDetails;
                 dispatch({ type: FETCHING_QUESTIONS });
                 const { data } = await fetchQuestionsApi(token);
+                console.log(data.preordered_tree);
                 dispatch({ type: FETCH_QUESTIONS, payload: data.preordered_tree });
           }
         } catch (err) {}

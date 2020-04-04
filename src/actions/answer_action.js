@@ -20,7 +20,7 @@ export const submitAnswers = () => {
             const location = JSON.parse(localStorage.getItem('location'));
             const { loginDetails } = getState().accountReducer;
             const { token } = loginDetails;
-            const { data } = submitAnswersApi({token, answers: answersParam, location});
+            const { data } = await submitAnswersApi({token, answers: answersParam, location});
             dispatch({ type:SUBMIT_ANSWERS, payload: data });
         } catch(err) {
 

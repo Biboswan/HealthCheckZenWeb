@@ -7,6 +7,7 @@ import { goToNextQuestion } from "../../actions/batch_action";
 import { QuestionTree } from '../../utils/data-structures';
 import { setGeoLocation } from '../../utils/helper';
 import Loader from "../../components/Loader";
+import Toastbar from '../../components/Toastbar'; 
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Radio from '../../components/Radio';
@@ -60,8 +61,11 @@ const getNativeQuestion = (question) => {
     }
 };
 
+let isFormSubmit = false;
+
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
+    const [isShowFormSubmitErrorToast, setIsShowFormSubmitErrorToast] = useState(false);
     const { t } = useTranslation();
     const { isFetchingQuestions,
             answers,
@@ -70,13 +74,21 @@ const Home = props => {
             fetchQuestions,
             goToNextQuestion,
             updateAnswers,
-            submitAnswers
+            submitAnswers,
+            submitedAnswers
         } = props;
 
     useEffect(() => {
         fetchQuestions();
         setGeoLocation();
     },[]);
+
+    useEffect(() => {
+        if (submitedAnswers && isFormSubmit) {
+            isFormSubmit = false;
+            setIsShowFormSubmitErrorToast(true);
+        }
+    },[submitedAnswers])
 
     useLayoutEffect(() => {
         if (currentQuestionNode) {
@@ -121,6 +133,7 @@ const Home = props => {
     };
 
     const handleSubmit = () => {
+        isFormSubmit = true;
         submitAnswers();
     };
 
@@ -155,6 +168,9 @@ const Home = props => {
                     {currentQuestionNode && currentQuestionNode.parent
                     && <Button onClick={handlePrev}>{t('prev')}</Button>}
                 </ButtonContainer>
+                {submitedAnswers && isShowFormSubmitErrorToast && <Toastbar
+                message={submitedAnswers.suggestion}
+                setIsToastOpen={setIsShowFormSubmitErrorToast} />}
             </Fragment>}
         </Container>
     );
@@ -162,8 +178,7 @@ const Home = props => {
 
 const mapStateToProps = ({ questionsReducer, answersReducer }) => {
     const { isFetchingQuestions, questions, currentQuestionId } = questionsReducer;
-    const { answers, answeredAll } = answersReducer;
-
+    const { answers, answeredAll, submitedAnswers } = answersReducer;
     let currentQuestionNode = null;
     if (questions) {
         const Tree = buildTree(questions);
@@ -179,7 +194,8 @@ const mapStateToProps = ({ questionsReducer, answersReducer }) => {
         isFetchingQuestions,
         currentQuestionNode,
         answers,
-        answeredAll
+        answeredAll,
+        submitedAnswers
     };
 };
 
