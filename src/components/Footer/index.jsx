@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { useTranslation } from 'react-i18next';
 import { Language } from '../../constants';
 
 const Container = styled.footer`
@@ -30,10 +31,23 @@ const InnerContainer = styled.ul`
 
 
 const Footer = () => {
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+    };
+
     return (
         <Container>
             <InnerContainer>
-            {Object.keys(Language).map(key => <li key={key} role='button'>{Language[key]}</li>)}
+            {Object.keys(Language).map(key =>
+            <li 
+                key={key}
+                role='button'
+                onClick={() => changeLanguage(key)}
+                >
+                {Language[key]}
+            </li>)}
             </InnerContainer>
         </Container>
     );

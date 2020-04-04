@@ -34,7 +34,7 @@ export const GO_TO_NEXT_Q = 'Go_To_Next_Question';
  * Languages
  */
 export const Language = {
-  'English': 'English',
-  'Hindi': 'हिन्दी',
+  'en': 'English',
+  'hi': 'हिन्दी',
   'Bangla': 'বাংলা'
 };
