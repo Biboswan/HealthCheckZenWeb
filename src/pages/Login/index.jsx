@@ -11,11 +11,11 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 85vh;
-  color: ${props => props.theme.color.primaryText};
+  color: ${props => props.theme.color.borderDark};
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.brand};
-
+  background-color: ${props => props.theme.color.primaryText};
+  padding: 0 20px;
   & div {
     max-width: 425px;
     width: 100%;

@@ -37,8 +37,6 @@ const Header = props => {
         <Container>
             <Logo size='80px' className='logo' />
             <h1>{t('appName')}</h1>
-            { loginDetails &&  loginDetails.success &&
-            <LogoutButton>{t('logout')}</LogoutButton>}
         </Container>
     );
 };
