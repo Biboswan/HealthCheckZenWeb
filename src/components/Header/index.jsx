@@ -6,8 +6,8 @@ import Logo from "../Logo";
 import Button from '../Button';
 
 const Container = styled.header`
-    background-color: ${props => props.theme.color.primaryText};
-    color: ${props => props.theme.color.borderDark};
+    background-color: ${props => props.theme.color.brand};
+    color: ${props => props.theme.color.primaryText};
     display: flex;
     align-items: center;
     justify-content: space-between;

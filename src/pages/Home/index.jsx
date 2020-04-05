@@ -18,10 +18,10 @@ display: flex;
 flex-direction: column;
 width: 100vw;
 height: 85vh;
-color: ${props => props.theme.color.primaryText};
+color: ${props => props.theme.color.borerDark};
 align-items: center;
 justify-content: center;
-background-color: ${props => props.theme.color.brand};
+background-color: ${props => props.theme.color.primaryText};
 `;
 
 const ButtonContainer = styled.div`
@@ -37,8 +37,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Question = styled.div`
-    font-weight: 700;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 18px;
     max-width: 65ch;
     text-align: center;
     padding: 0 20px;
