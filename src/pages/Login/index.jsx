@@ -11,11 +11,11 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 85vh;
-  color: ${props => props.theme.color.primaryText};
+  color: ${props => props.theme.color.borderDark};
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.brand};
-
+  background-color: ${props => props.theme.color.primaryText};
+  padding: 0 20px;
   & div {
     max-width: 425px;
     width: 100%;
@@ -64,17 +64,19 @@ const Login = props => {
   },[loginDetails]);
 
   const validation = (name, value) => {
-    if (value.length === 0) {
-      return setFormStatus(formStatus => ({
+    if (value) {
+      if (value.length === 0) {
+        return setFormStatus(formStatus => ({
+          ...formStatus,
+          [name]: { type: "error", message: t('emptyField') }
+        }));
+      }
+
+      setFormStatus(formStatus => ({
         ...formStatus,
-        [name]: { type: "error", message: t('emptyField') }
+        [name]: { type: "success" }
       }));
     }
-
-    setFormStatus(formStatus => ({
-      ...formStatus,
-      [name]: { type: "success" }
-    }));
   };
 
   const handleOnChange = e => {

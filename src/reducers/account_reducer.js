@@ -9,7 +9,7 @@ export default function(state = INITIAL_STATE, action) {
     case LOGIN:
       return { ...state, loginDetails: action.payload };
     case LOGOUT:
-      return { ...INITIAL_STATE };
+      return INITIAL_STATE;
     default:
       return state;
   }

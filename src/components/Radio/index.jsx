@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
     margin: 0.5rem;
+    color: ${props => props.theme.color.borderDark};
     input[type="radio"] {
         position: absolute;
         opacity: 0;

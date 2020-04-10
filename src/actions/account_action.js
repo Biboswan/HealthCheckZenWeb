@@ -9,3 +9,9 @@ export const loginUser = ({ email, password }) => {
     } catch (err) {}
   };
 };
+
+export const logoutUser = () => {
+  return dispatch => {
+    dispatch({ type: LOGOUT });
+  }
+};

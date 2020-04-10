@@ -2,7 +2,7 @@
  * Color Palette
  */
 export const color = {
-  FIERY_COLOR: "#FF5D73",
+  FIERY_COLOR: "#e28d99",
   TROLLEY_GREY: "grey",
   OUTER_SPACE: "494949",
   WHITE: "#FFF",

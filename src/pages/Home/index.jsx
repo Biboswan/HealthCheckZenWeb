@@ -18,10 +18,10 @@ display: flex;
 flex-direction: column;
 width: 100vw;
 height: 85vh;
-color: ${props => props.theme.color.primaryText};
+color: ${props => props.theme.color.borerDark};
 align-items: center;
 justify-content: center;
-background-color: ${props => props.theme.color.brand};
+background-color: ${props => props.theme.color.primaryText};
 `;
 
 const ButtonContainer = styled.div`
@@ -37,8 +37,11 @@ const ButtonContainer = styled.div`
 `;
 
 const Question = styled.div`
-    font-weight: 700;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 18px;
+    max-width: 65ch;
+    text-align: center;
+    padding: 0 20px;
 `;
 
 const Options = styled.form`
@@ -62,6 +65,7 @@ const getNativeQuestion = (question) => {
 };
 
 let isFormSubmit = false;
+//const m ='Pls go physician and take self-qurantine immediately! Covid Test is neccessary';
 
 const Home = props => {
     const [ansSelected, setAnswerSelected] = useState(null);
@@ -111,23 +115,30 @@ const Home = props => {
     const handleNext = () => {
         if (!!ansSelected) {
             let nextNode = currentQuestionNode[ansSelected];
+            //console.log('d',currentQuestionNode);
+            let weight = ansSelected === "yes"?currentQuestionNode["yes_weight"]: ansSelected === "no"? currentQuestionNode["no_weight"]:0;
+            //console.log('ff', weight);
             if (nextNode) {
                 goToNextQuestion({ 
                     qid: currentQuestionNode.q_id,
                     nextQid: currentQuestionNode[ansSelected].q_id,
-                    answer: ansSelected
+                    answer: ansSelected,
+                    weight
                 });
             } else {
-                updateAnswers(currentQuestionNode.q_id, ansSelected, true);
+                updateAnswers(currentQuestionNode.q_id, ansSelected, true, weight);
             }
         }
     };
 
     const handlePrev = () => {
+        let weight = ansSelected === "yes"?
+            currentQuestionNode.yes_weight: ansSelected === "no"? currentQuestionNode.no_weight:0;
         goToNextQuestion({ 
             qid: currentQuestionNode.q_id,
             nextQid: currentQuestionNode.parent.q_id,
-            answer: ansSelected
+            answer: ansSelected,
+            weight
         });
     };
 
@@ -159,8 +170,7 @@ const Home = props => {
                         isChecked={ansSelected === "no"} />
                 </Options>
                 <ButtonContainer>
-                    {currentQuestionNode &&
-                    (currentQuestionNode.yes || currentQuestionNode.no)
+                    {currentQuestionNode && !answeredAll
                     &&<Button onClick={handleNext} className='btn-next'>{t('next')}</Button>}
                     {currentQuestionNode && (!currentQuestionNode.yes && !currentQuestionNode.no) && answeredAll
                     && <Button className='btn-next' onClick={handleSubmit}>{t('submit')}</Button>}

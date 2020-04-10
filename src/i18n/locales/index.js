@@ -2,7 +2,7 @@ const en = {
     'en-lg': {
         appName: 'HealthCheckZen',
         login: 'Login',
-        logout: 'logout',
+        logout: 'Logout',
         signup: 'Signup',
         email: 'Email',
         password: 'Password',

@@ -5,11 +5,11 @@ import RightTick from "../Icons/RightTick";
 
 const InputContainer = styled.div`
   box-sizing: border-box;
-  width: 100%;
+  width: 95%;
   display: flex;
   padding-right: 0.75em;
   border-radius: 2px;
-  border: solid 1px ${props => props.theme.color.borderLight};
+  border: solid 1px ${props => props.theme.color.borderDark};
   &:focus-within {
     outline: none;
     border-color: ${props =>

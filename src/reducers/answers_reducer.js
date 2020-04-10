@@ -1,4 +1,4 @@
-import { UPDATE_ANSWERS, SUBMITING_ANSWERS, SUBMIT_ANSWERS, GO_TO_NEXT_Q } from "../constants";
+import { LOGOUT, UPDATE_ANSWERS, SUBMITING_ANSWERS, SUBMIT_ANSWERS, GO_TO_NEXT_Q } from "../constants";
 
 const INITIAL_STATE = {
     answers: null,
@@ -10,14 +10,17 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
       case UPDATE_ANSWERS:
-        return { ...state, answers: { ...state.answers, [action.payload.qid]: action.payload.answer },
+        return { ...state, answers: { ...state.answers, [action.payload.qid]: { res: action.payload.answer, weight: action.payload.weight } },
           answeredAll: action.payload.answeredAll };
       case SUBMITING_ANSWERS:
         return { ...state, submitingAnswers: true }
       case SUBMIT_ANSWERS:
         return { ...state, submitingAnswers: false, submitedAnswers: action.payload};
       case GO_TO_NEXT_Q:
-        return { ...state, answers: { ...state.answers, [action.payload.qid]: action.payload.answer } };
+        return { ...state, answers: { ...state.answers, [action.payload.qid]: 
+          { res: action.payload.answer, weight: action.payload.weight } }};
+      case LOGOUT:
+        return INITIAL_STATE;
       default:
         return state;
     }

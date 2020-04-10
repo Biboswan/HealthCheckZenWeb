@@ -11,9 +11,9 @@ export const fetchQuestions = () => {
                 dispatch({ type: FETCHING_QUESTIONS });
                 const { data } = await fetchQuestionsApi(token);
                 console.log(data.preordered_tree);
+                localStorage.setItem('user_details', JSON.stringify(data.user_details));
                 dispatch({ type: FETCH_QUESTIONS, payload: data.preordered_tree });
           }
         } catch (err) {}
       };
 }
-
