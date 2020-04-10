@@ -1,4 +1,4 @@
-import { UPDATE_ANSWERS, SUBMITING_ANSWERS, SUBMIT_ANSWERS, GO_TO_NEXT_Q } from "../constants";
+import { LOGOUT, UPDATE_ANSWERS, SUBMITING_ANSWERS, SUBMIT_ANSWERS, GO_TO_NEXT_Q } from "../constants";
 
 const INITIAL_STATE = {
     answers: null,
@@ -19,6 +19,8 @@ export default function(state = INITIAL_STATE, action) {
       case GO_TO_NEXT_Q:
         return { ...state, answers: { ...state.answers, [action.payload.qid]: 
           { res: action.payload.answer, weight: action.payload.weight } }};
+      case LOGOUT:
+        return INITIAL_STATE;
       default:
         return state;
     }

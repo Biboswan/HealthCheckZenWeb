@@ -30,8 +30,8 @@ const App = () => {
   return (
     <ThemeProvider theme={THEME}>
       <GlobalStyle />
-      <Header />
       <BrowserRouter>
+        <Header />
         <Suspense fallback={<Loader/>}>
           <Switch>
             <Route exact path="/" component={Landing} />

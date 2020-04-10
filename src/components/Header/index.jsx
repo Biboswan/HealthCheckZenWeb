@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/account_action';
 import Logo from "../Logo";
 import Button from '../Button';
 
@@ -31,12 +33,18 @@ const LogoutButton = styled(Button)`
 
 const Header = props => {
     const { t } = useTranslation();
-    const { loginDetails } = props;
+    const history = useHistory();
+    const { loginDetails, logoutUser } = props;
+
+    useEffect(() => {
+        history.push('/');
+    },[loginDetails])
 
     return (
         <Container>
             <Logo size='80px' className='logo' />
             <h1>{t('appName')}</h1>
+            {loginDetails && <LogoutButton onClick={logoutUser}>{t('logout')}</LogoutButton>}
         </Container>
     );
 };
@@ -47,4 +55,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);

@@ -64,17 +64,19 @@ const Login = props => {
   },[loginDetails]);
 
   const validation = (name, value) => {
-    if (value.length === 0) {
-      return setFormStatus(formStatus => ({
+    if (value) {
+      if (value.length === 0) {
+        return setFormStatus(formStatus => ({
+          ...formStatus,
+          [name]: { type: "error", message: t('emptyField') }
+        }));
+      }
+
+      setFormStatus(formStatus => ({
         ...formStatus,
-        [name]: { type: "error", message: t('emptyField') }
+        [name]: { type: "success" }
       }));
     }
-
-    setFormStatus(formStatus => ({
-      ...formStatus,
-      [name]: { type: "success" }
-    }));
   };
 
   const handleOnChange = e => {
