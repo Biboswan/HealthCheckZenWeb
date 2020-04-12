@@ -14,7 +14,7 @@ export const color = {
  * issue with cors: hack https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe
  */
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-export const API_ROOT = "http://healthcheckzen.in:8192";
+export const API_ROOT = proxyurl+"http://healthcheckzen.in:8192";
 
 /**
  * ACTION TYPES
