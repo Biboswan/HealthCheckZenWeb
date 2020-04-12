@@ -16,11 +16,6 @@ const Container = styled.header`
     padding: 15px;
     top: 0;
 
-    h1 { 
-        padding: 0;
-        margin: 0;
-    }
-
     .logo {
         margin-left:0;
     }
