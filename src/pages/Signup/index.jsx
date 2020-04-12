@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import InputField from "../../components/Input";
 import Toastbar from '../../components/Toastbar'; 
+import FormAlternateSection from "../../components/FormAlternateSection";
 import { signup } from '../../api/auth';
 
 const Container = styled.div`
@@ -140,6 +141,7 @@ const Signup = props => {
               <Button onClick={handleOnSubmit}>{t('signup')}</Button>
             </SubmitSection>
           </form>)}
+          <FormAlternateSection link="/login" linkLabel={t('login')} />
           {isShowFormSubmitErrorToast && formSubmitStatus.status === "error" && <Toastbar
             message={formSubmitStatus.message}
             setIsToastOpen={setIsShowFormSubmitErrorToast} />}

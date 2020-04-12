@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 import Button from "../../components/Button";
 import InputField from "../../components/Input";
 import { loginUser } from "../../actions/account_action";
-import Toastbar from '../../components/Toastbar'; 
+import FormAlternateSection from "../../components/FormAlternateSection";
+import Toastbar from '../../components/Toastbar';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 85vh;
   color: ${props => props.theme.color.borderDark};
@@ -136,6 +138,7 @@ const Login = props => {
             <Button onClick={handleOnSubmit}>{t('login')}</Button>
           </SubmitSection>
         </form>
+        <FormAlternateSection link="/signup" linkLabel={t('signup')} />
       </div>
       {isShowLoginErrorToast && <Toastbar
         message={t('wrongCred')}

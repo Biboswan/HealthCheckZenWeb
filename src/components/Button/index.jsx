@@ -10,10 +10,11 @@ const ButtonStyled = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
-  align-center: center;
+  align-items: center;
   min-width: 60px;
   min-height: 48px;
   text-align: center;
+  box-sizing: border-box; 
 
   &:hover {
     opacity: 0.85;
