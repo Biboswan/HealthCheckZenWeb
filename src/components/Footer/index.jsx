@@ -30,7 +30,6 @@ const InnerContainer = styled.ul`
     }
 `;
 
-
 const Footer = () => {
     const { i18n } = useTranslation();
 

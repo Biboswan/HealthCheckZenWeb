@@ -77,6 +77,11 @@ const Login = props => {
         ...formStatus,
         [name]: { type: "success" }
       }));
+    } else {
+      setFormStatus(formStatus => ({
+        ...formStatus,
+        [name]: { type: "error", message: t('emptyField') }
+      }));
     }
   };
 
