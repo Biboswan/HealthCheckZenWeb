@@ -4,13 +4,17 @@ import styled from "styled-components";
 const ButtonStyled = styled.button`
   border-radius: 8px;
   background-color: ${props => props.theme.color.primaryButton};
-  padding: 12px 24px;
-  color: ${props => props.theme.color.primaryText};
+  padding: 12px 36px;
+  color: ${props => props.theme.color.bg};
   border: 1px solid ${props => props.theme.color.borderDark};
   cursor: pointer;
-  min-width: 48px;
-  max-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 60px;
+  min-height: 48px;
   text-align: center;
+  box-sizing: border-box; 
 
   &:hover {
     opacity: 0.85;

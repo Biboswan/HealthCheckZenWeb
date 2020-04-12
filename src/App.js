@@ -17,14 +17,14 @@ const GlobalStyle = createGlobalStyle`
     margin:0;
     padding:0;
     font-size: 1rem;
-    font-family: Arial
+    font-family: Arial;
+    background-color: ${props => props.theme.color.bg};
   }
   h1,h2,h3,h4,h5,p,span,section,article,ul,li {
     margin:0;
     padding:0;
   }
 `;
-
 
 const App = () => {
   return (

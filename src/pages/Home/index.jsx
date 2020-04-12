@@ -21,7 +21,6 @@ height: 85vh;
 color: ${props => props.theme.color.borerDark};
 align-items: center;
 justify-content: center;
-background-color: ${props => props.theme.color.primaryText};
 `;
 
 const ButtonContainer = styled.div`

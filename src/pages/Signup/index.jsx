@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import InputField from "../../components/Input";
 import Toastbar from '../../components/Toastbar'; 
+import FormAlternateSection from "../../components/FormAlternateSection";
 import { signup } from '../../api/auth';
 
 const Container = styled.div`
@@ -13,7 +14,8 @@ const Container = styled.div`
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.brand};
+  padding: 0 20px;
+  box-sizing: border-box;
 
   & div {
     max-width: 425px;
@@ -61,6 +63,11 @@ const Signup = props => {
         setFormStatus(formStatus => ({
           ...formStatus,
           [name]: { type: "success" }
+        }));
+      } else {
+        setFormStatus(formStatus => ({
+          ...formStatus,
+          [name]: { type: "error", message: t('emptyField') }
         }));
       }
     };
@@ -134,6 +141,7 @@ const Signup = props => {
               <Button onClick={handleOnSubmit}>{t('signup')}</Button>
             </SubmitSection>
           </form>)}
+          <FormAlternateSection link="/login" linkLabel={t('login')} />
           {isShowFormSubmitErrorToast && formSubmitStatus.status === "error" && <Toastbar
             message={formSubmitStatus.message}
             setIsToastOpen={setIsShowFormSubmitErrorToast} />}

@@ -41,7 +41,7 @@ const Input = styled.input`
 `;
 
 const ErrorMessage = styled.p`
-  color: ${props => props.theme.color.primaryText};
+  color: ${props => props.theme.color.error};
 `;
 
 const dummyHandler = () => {};
