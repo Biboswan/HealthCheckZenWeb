@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Loader from './components/Loader';
-import Footer from './components/Footer';
+import LanguageBar from './components/LanguageBar';
 import THEME from "./theme";
 import Header from './components/Header';
 
@@ -37,6 +37,7 @@ const App = () => {
       <GlobalStyle />
         <BrowserRouter>
           <Header />
+          <LanguageBar />
           <main>
             <Suspense fallback={<Loader/>}>
               <Switch>
@@ -48,7 +49,6 @@ const App = () => {
             </Suspense>
           </main>
         </BrowserRouter>
-        <Footer />
     </ThemeProvider>
   );
 };

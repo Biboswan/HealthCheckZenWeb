@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
 import { Language } from '../../constants';
 
-const Container = styled.footer`
+const Container = styled.div`
     background-color: ${props => props.theme.color.borderDark};
     width: 100vw;
     height: 15vh;
@@ -30,7 +30,7 @@ const InnerContainer = styled.ul`
     }
 `;
 
-const Footer = () => {
+const LanguageBar = () => {
     const { i18n } = useTranslation();
 
     const changeLanguage = lng => {
@@ -53,4 +53,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default LanguageBar;
