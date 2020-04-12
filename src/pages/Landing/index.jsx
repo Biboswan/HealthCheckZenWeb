@@ -11,7 +11,6 @@ const Container = styled.div`
   height: 85vh;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.primaryText};
 `;
 
 const InnerContainer = styled.div`

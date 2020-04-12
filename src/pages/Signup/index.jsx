@@ -13,7 +13,6 @@ const Container = styled.div`
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.color.brand};
 
   & div {
     max-width: 425px;

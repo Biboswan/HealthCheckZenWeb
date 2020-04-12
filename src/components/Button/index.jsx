@@ -5,7 +5,7 @@ const ButtonStyled = styled.button`
   border-radius: 8px;
   background-color: ${props => props.theme.color.primaryButton};
   padding: 12px 24px;
-  color: ${props => props.theme.color.primaryText};
+  color: ${props => props.theme.color.bg};
   border: 1px solid ${props => props.theme.color.borderDark};
   cursor: pointer;
   min-width: 48px;

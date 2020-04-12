@@ -9,7 +9,7 @@ import Button from '../Button';
 
 const Container = styled.header`
     background-color: ${props => props.theme.color.brand};
-    color: ${props => props.theme.color.primaryText};
+    color: ${props => props.theme.color.bg};
     display: flex;
     align-items: center;
     justify-content: space-between;

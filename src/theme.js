@@ -9,12 +9,13 @@ const {
 } = color;
 
 const BRAND_COLOR = FIERY_COLOR;
-const TEXT_COLOR = WHITE;
+const TEXT_COLOR = REGISTRATION_BLACK;
 const SECONDARY_TEXT_COLOR = TROLLEY_GREY;
 
 const THEME = {
   color: {
     brand: BRAND_COLOR,
+    bg: WHITE,
     primaryText: TEXT_COLOR,
     secondaryText: SECONDARY_TEXT_COLOR,
     borderDark: REGISTRATION_BLACK,

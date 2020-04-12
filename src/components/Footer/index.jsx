@@ -7,7 +7,7 @@ const Container = styled.footer`
     background-color: ${props => props.theme.color.borderDark};
     width: 100vw;
     height: 15vh;
-    color: ${props => props.theme.color.primaryText};
+    color: ${props => props.theme.color.bg};
     font-size: 15px;
     display: flex;
     justify-content: center;
