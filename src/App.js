@@ -20,6 +20,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Arial;
     background-color: ${props => props.theme.color.bg};
   }
+
+  main {
+    height: 85vh;
+  }
+
   h1,h2,h3,h4,h5,p,span,section,article,ul,li {
     margin:0;
     padding:0;
@@ -30,18 +35,20 @@ const App = () => {
   return (
     <ThemeProvider theme={THEME}>
       <GlobalStyle />
-      <BrowserRouter>
-        <Header />
-        <Suspense fallback={<Loader/>}>
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <PrivateRoute exact path="/home" component={Home} />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
-      <Footer />
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Suspense fallback={<Loader/>}>
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <PrivateRoute exact path="/home" component={Home} />
+              </Switch>
+            </Suspense>
+          </main>
+        </BrowserRouter>
+        <Footer />
     </ThemeProvider>
   );
 };

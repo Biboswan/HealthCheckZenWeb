@@ -23,7 +23,7 @@ const Container = styled.header`
 
 const LogoutButton = styled(Button)`
     background-color: ${props => props.theme.color.borderDark};
-    color: ${props => props.theme.color.primaryText};
+    color: ${props => props.theme.color.bg};
 `;
 
 const Header = props => {
