@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import React from 'react';
 import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -28,18 +27,13 @@ const LogoutButton = styled(Button)`
 
 const Header = props => {
     const { t } = useTranslation();
-    const history = useHistory();
     const { loginDetails, logoutUser } = props;
-
-    useEffect(() => {
-        history.push('/');
-    },[loginDetails])
 
     return (
         <Container>
             <Logo size='80px' className='logo' />
             <h1>{t('appName')}</h1>
-            {loginDetails && <LogoutButton onClick={logoutUser}>{t('logout')}</LogoutButton>}
+            {loginDetails && loginDetails.success && <LogoutButton onClick={logoutUser}>{t('logout')}</LogoutButton>}
         </Container>
     );
 };

@@ -1,0 +1,2 @@
+webpackJsonp([4],{188:function(e,t,n){"use strict";function r(e,t){var n={};for(var r in e)t.indexOf(r)>=0||Object.prototype.hasOwnProperty.call(e,r)&&(n[r]=e[r]);return n}Object.defineProperty(t,"__esModule",{value:!0});var o=n(0),a=n.n(o),l=n(24),i=n(27),c=function(e){var t=e.loginDetails,n=r(e,["loginDetails"]);return t&&t.token?a.a.createElement(i.d,n):a.a.createElement(i.c,{to:"/login"})},u=function(e){return{loginDetails:e.accountReducer.loginDetails}};t.default=Object(l.b)(u,null)(c)}});
+//# sourceMappingURL=4.74d17428.chunk.js.map

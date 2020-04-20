@@ -55,7 +55,7 @@ const Login = props => {
   const { t } = useTranslation();
   const { loginDetails } = props;
 
-  if (loginDetails && loginDetails.success) {
+  if (loginDetails && loginDetails.success === true) {
     props.history.push('/home');
   }
 
@@ -102,6 +102,7 @@ const Login = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
+
     isFormSubmit = true;
     props.loginUser(formValue);
   };

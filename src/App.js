@@ -41,10 +41,10 @@ const App = () => {
           <main>
             <Suspense fallback={<Loader/>}>
               <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <PrivateRoute exact path="/home" component={Home} />
+                <Route exact={true} path="/" component={Landing} />
+                <Route exact={true} path="/login" component={Login} />
+                <Route exact={true} path="/signup" component={Signup} />
+                <PrivateRoute exact={true} path="/home" component={Home} />
               </Switch>
             </Suspense>
           </main>

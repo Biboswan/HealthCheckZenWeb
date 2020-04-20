@@ -5,8 +5,13 @@ export const loginUser = ({ email, password }) => {
   return async dispatch => {
     try {
       const { data } = await login(email, password);
+      console.log('data', data);
       dispatch({ type: LOGIN, payload: data });
-    } catch (err) {}
+    } catch (err) {
+      if (err.response) {
+        dispatch({ type: LOGIN, payload: err.response.data });
+      }
+    }
   };
 };
 
