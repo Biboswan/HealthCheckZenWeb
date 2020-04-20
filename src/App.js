@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from "react";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import React, { lazy, Suspense, useEffect } from "react";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import ReactGA from "react-ga";
 import Loader from './components/Loader';
 import LanguageBar from './components/LanguageBar';
 import THEME from "./theme";
@@ -31,24 +32,29 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App = () => {
+const App = props => {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.set({ page: location.pathname });
+    ReactGA.pageview(location.pathname);
+  }, [location]);
+
   return (
     <ThemeProvider theme={THEME}>
       <GlobalStyle />
-        <BrowserRouter>
-          <Header />
-          <LanguageBar />
-          <main>
-            <Suspense fallback={<Loader/>}>
-              <Switch>
-                <Route exact={true} path="/" component={Landing} />
-                <Route exact={true} path="/login" component={Login} />
-                <Route exact={true} path="/signup" component={Signup} />
-                <PrivateRoute exact={true} path="/home" component={Home} />
-              </Switch>
-            </Suspense>
-          </main>
-        </BrowserRouter>
+      <Header />
+      <LanguageBar />
+      <main>
+        <Suspense fallback={<Loader/>}>
+          <Switch>
+            <Route exact={true} path="/" component={Landing} />
+            <Route exact={true} path="/login" component={Login} />
+            <Route exact={true} path="/signup" component={Signup} />
+            <PrivateRoute exact={true} path="/home" component={Home} />
+          </Switch>
+        </Suspense>
+      </main>
     </ThemeProvider>
   );
 };

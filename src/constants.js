@@ -38,3 +38,8 @@ export const Language = {
   'hi': 'हिन्दी',
   'bn': 'বাংলা'
 };
+
+/**
+ * Analytics Tracking ID
+ */
+export const TRACKING_ID = 'UA-164047951-1';
