@@ -1,4 +1,4 @@
-import { LOGOUT, FETCHING_QUESTIONS, FETCH_QUESTIONS, SET_CURRENT_QUESTION_ID, GO_TO_NEXT_Q } from "../constants";
+import { LOGOUT, FETCHING_QUESTIONS, FETCH_QUESTIONS, SET_CURRENT_QUESTION_ID, GO_TO_NEXT_Q, GO_TO_PREV_Q } from "../constants";
 
 const INITIAL_STATE = {
   questions: null,
@@ -15,6 +15,7 @@ export default function(state = INITIAL_STATE, action) {
     case  SET_CURRENT_QUESTION_ID:
       return { ...state, currentQuestionId: action.payload };
     case GO_TO_NEXT_Q:
+    case GO_TO_PREV_Q:
       return { ...state, currentQuestionId: action.payload.nextQid };
     case LOGOUT:
       return INITIAL_STATE;

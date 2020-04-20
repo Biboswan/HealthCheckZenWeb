@@ -29,6 +29,7 @@ export const SUBMIT_ANSWERS = 'Submit_answers';
 export const SET_CURRENT_QUESTION_ID = 'Set_Current_Question_Id';
 export const UPDATE_ANSWERS = 'Update_answers';
 export const GO_TO_NEXT_Q = 'Go_To_Next_Question';
+export const GO_TO_PREV_Q = 'Go_To_Prev_Question';
 
 /**
  * Languages
