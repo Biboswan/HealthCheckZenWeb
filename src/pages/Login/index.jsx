@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 85vh;
+  height: 100%;
   color: ${props => props.theme.color.borderDark};
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ const Login = props => {
   const { t } = useTranslation();
   const { loginDetails } = props;
 
-  if (loginDetails && loginDetails.success) {
+  if (loginDetails && loginDetails.success === true) {
     props.history.push('/home');
   }
 
@@ -102,6 +102,7 @@ const Login = props => {
 
   const handleOnSubmit = e => {
     e.preventDefault();
+
     isFormSubmit = true;
     props.loginUser(formValue);
   };

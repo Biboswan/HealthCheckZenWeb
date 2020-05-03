@@ -17,7 +17,7 @@ const Container = styled.div`
 display: flex;
 flex-direction: column;
 width: 100vw;
-height: 85vh;
+height: 100%;
 color: ${props => props.theme.color.borerDark};
 align-items: center;
 justify-content: center;
@@ -51,6 +51,7 @@ const Options = styled.form`
 const buildTree = memoizeOne(preorderArr => {
     const Tree = new QuestionTree();
     Tree.constructTree(preorderArr);
+    console.log('hollo');
     return Tree;
 });
 
@@ -131,13 +132,9 @@ const Home = props => {
     };
 
     const handlePrev = () => {
-        let weight = ansSelected === "yes"?
-            currentQuestionNode.yes_weight: ansSelected === "no"? currentQuestionNode.no_weight:0;
         goToNextQuestion({ 
             qid: currentQuestionNode.q_id,
-            nextQid: currentQuestionNode.parent.q_id,
-            answer: ansSelected,
-            weight
+            nextQid: currentQuestionNode.parent.q_id
         });
     };
 

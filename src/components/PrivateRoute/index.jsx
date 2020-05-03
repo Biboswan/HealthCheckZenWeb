@@ -4,7 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = props => {
     const { loginDetails, ...rest } = props;
-   if (loginDetails && loginDetails.token) {
+   if (loginDetails && loginDetails.success) {
         return  <Route {...rest} />
    }
 

@@ -10,7 +10,7 @@ import { signup } from '../../api/auth';
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 85vh;
+  height: 100%;
   color: ${props => props.theme.color.primaryText};
   align-items: center;
   justify-content: center;
