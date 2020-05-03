@@ -7,6 +7,10 @@
     "starter"
   ],
   "main": "src/index.js",
+  "engines": {
+    "node": ">=12.16.0",
+    "yarn": ">=1.22"
+  },
   "dependencies": {
     "axios": "0.19.2",
     "i18next": "^19.3.4",
