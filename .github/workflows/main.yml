@@ -15,11 +15,13 @@ jobs:
       - name: deploy to server
         uses: appleboy/ssh-action@v0.0.9
         env:
-          mypassphrase: ${{secrets.MYPASSPHARASE}}
+          MYPASSPHARASE: ${{secrets.MYPASSPHARASE}}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          envs: mypassphrase
           script: |
-            mkdir justignore
+            cd ui/HealthCheckZenWeb
+            echo $MYPASSPHARASE | git pull origin master
+            yarn
+            yarn build
