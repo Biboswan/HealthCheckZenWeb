@@ -1,0 +1,28 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: deploy to server
+        uses: appleboy/ssh-action@v0.0.9
+        env:
+          mypassphrase: ${{secrets.MYPASSPHARASE}}
+        with:
+          host:${{ secrets.HOST }}
+          username:${{ secrets.USERNAME }}
+          key:${{ secrets.KEY }}
+          envs:mypassphrase
+          script:|
+            cd ui/HealthCheckZenWeb
+            echo mypassphrase | git pull origin master
+            yarn
+            yarn build
