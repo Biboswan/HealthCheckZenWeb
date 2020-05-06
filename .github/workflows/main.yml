@@ -17,11 +17,11 @@ jobs:
         env:
           mypassphrase: ${{secrets.MYPASSPHARASE}}
         with:
-          host:${{ secrets.HOST }}
-          username:${{ secrets.USERNAME }}
-          key:${{ secrets.KEY }}
-          envs:mypassphrase
-          script:|
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          envs: mypassphrase
+          script: |
             cd ui/HealthCheckZenWeb
             echo mypassphrase | git pull origin master
             yarn
