@@ -22,7 +22,4 @@ jobs:
           key: ${{ secrets.KEY }}
           envs: mypassphrase
           script: |
-            cd ui/HealthCheckZenWeb
-            echo mypassphrase | git pull origin master
-            yarn
-            yarn build
+            mkdir justignore
