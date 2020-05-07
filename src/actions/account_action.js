@@ -1,5 +1,5 @@
-import { LOGIN, LOGOUT, SIGNUP } from "../constants";
-import { signup, login } from "../api/auth";
+import { LOGIN, LOGOUT } from "../constants";
+import { login } from "../api/auth";
 
 export const loginUser = ({ email, password }) => {
   return async dispatch => {

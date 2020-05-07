@@ -89,7 +89,7 @@ const Signup = props => {
       e.preventDefault();
       try {
         const { email, password, age } = formValue;
-        const { data } = await signup({ email_id: email, password, age: Number(age) });
+        await signup({ email_id: email, password, age: Number(age) });
         setFormSubmitStatus({ status :"success", message: "Check verification link in the email !" });
       } catch (err) {
         setFormSubmitStatus({ status :"error" , message: err.response.data.error });
