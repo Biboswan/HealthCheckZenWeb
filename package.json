@@ -2,6 +2,7 @@
   "name": "Healthcheckzen",
   "version": "1.0.0",
   "description": "Survey App",
+  "license": "MIT License",
   "keywords": [
     "react",
     "starter"
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -f build && react-scripts build",
+    "build": "rm -rf build && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
