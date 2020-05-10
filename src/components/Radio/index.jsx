@@ -54,7 +54,7 @@ const Container = styled.div`
 const Radio = ({ name, label, value, isChecked }) => {
     return (
         <Container>
-            <input tabIndex={0} name={name} type="radio" checked={isChecked}/>
+            <input tabIndex={isChecked ? 0 : -1} name={name} type="radio" checked={isChecked}/>
             <label data-id={value} className='radio-label'>{label}</label>
         </Container>
     )

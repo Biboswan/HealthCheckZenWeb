@@ -174,7 +174,7 @@ const Home = props => {
                     && <Button onClick={handlePrev}>{t('prev')}</Button>}
                 </ButtonContainer>
                 {submitedAnswers && isShowFormSubmitErrorToast && <Toastbar
-                message={submitedAnswers.suggestion}
+                message={getNativeQuestion(submitedAnswers.suggestion)}
                 setIsToastOpen={setIsShowFormSubmitErrorToast} />}
             </Fragment>}
         </Container>
