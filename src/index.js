@@ -24,6 +24,8 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 const store = createStore(persistedReducer, {}, applyMiddleware(reduxThunk));
 const persistor = persistStore(store);
 
+console.log('App running');
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
