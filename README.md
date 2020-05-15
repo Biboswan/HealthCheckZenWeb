@@ -6,3 +6,8 @@ with a weightage to the questions given by medical researchers and
 doctors.Decision tree is being populated by the answers and weightage
 that it carries changes at each level thereby learning from the answers and creating a model.
 After analysis, it can provide suggestions to the user acc to severity of each case.
+
+
+### Screenshot
+
+![screenshot question_screen](https://github.com/Biboswan/HealthCheckZenWeb/blob/master/screenshots/question.png)
